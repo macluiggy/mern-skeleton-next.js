@@ -1,5 +1,18 @@
 import { ChangeEvent } from "react";
-
+export type TCreate = (user: {
+  name: string;
+  email: string;
+  password: string | number;
+}) => Promise<{
+  message: string;
+  newUser: {
+    name: string;
+    email: string;
+    _id: string;
+    created: Date | string;
+  };
+  error?: any;
+}>;
 export type TRead = (
   params: { userId: string },
   credentials: { t: string | boolean },
