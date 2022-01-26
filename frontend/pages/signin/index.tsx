@@ -16,7 +16,7 @@ import {
 } from "@mui/material";
 import Link from "next/link";
 import { iUserSignIn } from "../../lib/types";
-import { UseStylesProps } from "./types";
+import { UseStylesProps } from "../../types/signin";
 import auth from "../../lib/auth-helper";
 import Redirect from "../../components/Redirect";
 // import Router from "next/router";
