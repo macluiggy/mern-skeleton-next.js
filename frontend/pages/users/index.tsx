@@ -16,6 +16,7 @@ import { path } from "../../config";
 import { list } from "../../lib/api-user";
 import { Container } from "../../components/Container";
 import { Fragment } from "react";
+import { useState, useEffect } from "react";
 
 type UseStylesProps = {
   root: SxProps;
@@ -32,8 +33,23 @@ const useStyles = (): UseStylesProps => ({
   },
 });
 
-const Users = ({ users }) => {
+const Users = () => {
+  const [users, setUsers] = useState([]);
   const classes = useStyles();
+  useEffect(() => {
+    const abortController = new AbortController();
+    const signal = abortController.signal;
+    list(signal).then((data) => {
+      if (data && data.error) return console.log(data.error);
+      console.log(data);
+
+      setUsers(data);
+    });
+
+    return function cleanup() {
+      abortController.abort();
+    };
+  }, []);
   return (
     <Container title="Users">
       <Paper sx={classes.root}>
@@ -66,22 +82,22 @@ const Users = ({ users }) => {
   );
 };
 
-const getUsers = async () => {
-  const abortController = new AbortController();
-  const { signal } = abortController;
-  // list(signal).then((data) => {
-  //   if (data && data.error) return console.log(data.error);
-  // });
-  const data = await list(signal);
-  if (data && data.error) return console.log(data.error);
-  return data;
-};
-export async function getStaticProps() {
-  const users = await getUsers();
-  return {
-    props: {
-      users,
-    },
-  };
-}
+// const getUsers = async () => {
+//   const abortController = new AbortController();
+//   const { signal } = abortController;
+//   // list(signal).then((data) => {
+//   //   if (data && data.error) return console.log(data.error);
+//   // });
+//   const data = await list(signal);
+//   if (data && data.error) return console.log(data.error);
+//   return data;
+// };
+// export async function getStaticProps() {
+//   const users = await getUsers();
+//   return {
+//     props: {
+//       users,
+//     },
+//   };
+// }
 export default Users;
