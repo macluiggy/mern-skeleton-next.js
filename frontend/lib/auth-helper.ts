@@ -1,7 +1,7 @@
 import { signout } from "./api-auth";
 import { iUserSignIn } from "./types";
 const auth = {
-  authenticate(jwt: iUserSignIn, cb) {
+  authenticate(jwt: iUserSignIn, cb: Function) {
     // console.log(jwt);
     /**token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NDMxMjE4MTZ9.M2zL2MnGqOvFS6lPbQ3QxeHengi5YU-8d8GrCvWXXiM"
 user:
