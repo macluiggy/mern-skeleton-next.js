@@ -14,7 +14,7 @@ import Link from "next/link";
 import { SxProps } from "@mui/material";
 import { path } from "../../config";
 import { list } from "../../lib/api-user";
-import { Container } from "../../components/Container/";
+import { Container } from "../../components/Container";
 import { Fragment } from "react";
 
 type UseStylesProps = {
