@@ -58,3 +58,38 @@ export type TRemove = (
 export type THandleChange = (
   name: string
 ) => (event: ChangeEvent<HTMLTextAreaElement>) => void;
+
+export type iUserSignIn = {
+  token: string;
+  user: {
+    _id: string;
+    name: string;
+    email: string;
+    created: Date;
+  };
+  error?: string;
+};
+/*
+the result of sing up
+{
+	"message": "Successfully signed up!",
+	"newUser": {
+		"name": "test2",
+		"email": "test2@gmail.com",
+		"_id": "61f15aa14f444b7df44a7eeb",
+		"created": "2022-01-26T14:28:49.485Z",
+		"__v": 0
+	}
+}
+*/
+
+export type OnSignIn = (user: { email: string; password: string }) => Promise<{
+  token: string;
+  user: {
+    _id: string;
+    name: string;
+    email: string;
+    created: Date;
+  };
+  error?: string;
+}>;

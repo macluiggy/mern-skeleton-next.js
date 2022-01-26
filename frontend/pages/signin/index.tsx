@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { signin } from "../../lib/api-auth";
 import {
   Card,
   Typography,
@@ -13,66 +14,82 @@ import {
   DialogContentText,
   DialogActions,
 } from "@mui/material";
-import { Error } from "@mui/icons-material";
 import Link from "next/link";
-import { UseStylesProps, UserProps } from "./";
-import { create } from "../../lib/api-user";
+import { iUserSignIn } from "../../lib/types";
+import { UseStylesProps } from "./types";
+import auth from "../../lib/auth-helper";
+import Redirect from "../../components/Redirect";
+// import Router from "next/router";
 
 const useStyles = (): UseStylesProps => ({
   card: {
     maxWidth: "600px",
     margin: "0 auto",
     textAlign: "center",
+    marginTop: "1rem",
     paddingBottom: "1rem",
   },
-  error: {},
-  title: {},
-  textField: {},
-  submit: {},
+  error: {
+    verticalAlign: "middle",
+  },
+  title: {
+    marginTop: "1rem",
+    color: "black",
+  },
+  textField: {
+    marginLeft: "1rem",
+    marginRight: "1rem",
+    width: 300,
+  },
+  submit: {
+    margin: "auto0",
+    marginBottom: "1rem",
+  },
 });
 
-export default function Signup() {
+export default function Signin() {
   const classes = useStyles();
-  const [values, setValues] = useState<UserProps>({
-    name: "",
-    password: "",
+  const [values, setValues] = useState({
     email: "",
-    open: false,
+    password: "",
     error: "",
+    redirectToReferrer: false,
   });
-  const handleChange = (name) => (event) => {
-    setValues({ ...values, [name]: event.target.value });
-  };
+  // const router = useRouter;
+
   const clickSubmit = () => {
     const user = {
-      name: values.name || undefined,
-      password: values.password || undefined,
       email: values.email || undefined,
+      password: values.password || undefined,
     };
-    create(user).then((data) => {
+
+    signin(user).then((data) => {
+      // console.log(data, "from signin");
+
       if (data.error) {
         setValues({ ...values, error: data.error });
       } else {
-        setValues({ ...values, error: "", open: true });
+        auth.authenticate(data, () => {
+          setValues({ ...values, error: "", redirectToReferrer: true });
+        });
       }
     });
   };
+
+  const handleChange = (name) => (event) => {
+    setValues({ ...values, error: "", [name]: event.target.value });
+  };
+
+  const { redirectToReferrer } = values;
+  if (redirectToReferrer) return <Redirect path="/" />;
+
   return (
     <div>
       <Card sx={classes.card}>
         <CardContent>
           <Typography variant="h6" sx={classes.title}>
-            Sign Up
+            Sign In
           </Typography>
-          <TextField
-            id="name"
-            sx={classes.textField}
-            label="Name"
-            onChange={handleChange("name")}
-            value={values.name}
-            margin="normal"
-          />
-          <br />
           <TextField
             id="email"
             type="email"
@@ -96,7 +113,7 @@ export default function Signup() {
           {values.error && (
             <Typography component="p" color="error">
               <Icon color="error" sx={classes.error}>
-                <Error />
+                error
               </Icon>
               {values.error}
             </Typography>
@@ -113,21 +130,6 @@ export default function Signup() {
           </Button>
         </CardActions>
       </Card>
-      <Dialog open={values.open} /**disableBackdropClick={true} */>
-        <DialogTitle>New Account</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            New account successfully created.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Link href={"/signin"}>
-            <Button color="primary" autoFocus variant="contained">
-              Sign In
-            </Button>
-          </Link>
-        </DialogActions>
-      </Dialog>
     </div>
   );
 }
