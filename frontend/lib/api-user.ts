@@ -1,5 +1,5 @@
 import { path } from "../config";
-import { TCreate, TRead, TRemove, TUpdate } from "./types";
+import { TCreate, /*TList,  */ TRead, TRemove, TUpdate } from "./types";
 const create: TCreate = async (user) => {
   try {
     let response = await fetch(`${path}/api/users`, {
@@ -16,7 +16,7 @@ const create: TCreate = async (user) => {
   }
 };
 
-const list = async (signal) => {
+const list /*: TList */ = async (signal) => {
   try {
     let response = await fetch(`${path}/api/users`, {
       method: "GET",

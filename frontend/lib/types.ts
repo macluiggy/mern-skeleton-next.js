@@ -13,6 +13,20 @@ export type TCreate = (user: {
   };
   error?: any;
 }>;
+
+export type TList = (signal: AbortSignal) =>
+  | Promise<
+      {
+        _id: string;
+        name: string;
+        email: string;
+        created: Date | string;
+        updated?: Date | string;
+        error?: any;
+      }[]
+    >
+  | { error: any };
+
 export type TRead = (
   params: { userId: string },
   credentials: { t: string | boolean },

@@ -40,7 +40,7 @@ const Users = () => {
     const signal = abortController.signal;
     list(signal).then((data) => {
       if (data && data.error) return console.log(data.error);
-      console.log(data);
+      // console.log(data);
 
       setUsers(data);
     });
@@ -59,19 +59,21 @@ const Users = () => {
           {users.map(({ _id, name }, i) => {
             return (
               <Fragment key={_id}>
-                <ListItem button>
-                  <ListItemAvatar>
-                    <Avatar>
-                      <Person />
-                    </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText primary={name} />
-                  <ListItemSecondaryAction>
-                    <IconButton>
-                      <ArrowForward />
-                    </IconButton>
-                  </ListItemSecondaryAction>
-                </ListItem>
+                <Link href={`/user/${_id}`}>
+                  <ListItem button>
+                    <ListItemAvatar>
+                      <Avatar>
+                        <Person />
+                      </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText primary={name} />
+                    <ListItemSecondaryAction>
+                      <IconButton>
+                        <ArrowForward />
+                      </IconButton>
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                </Link>
               </Fragment>
             );
           })}

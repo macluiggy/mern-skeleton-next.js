@@ -3,6 +3,7 @@ import { Container } from "../components/Container";
 import { Card, CardContent, CardMedia, Typography } from "@mui/material";
 import { SxProps, Theme } from "@mui/material";
 import Image from "next/image";
+import Link from "next/link";
 // import unicornbikeImg from "../public/unicornbike.jpg";
 // const unicornbikeImg = require("../public/unicornbike.jpg");
 type TUseStyles = {
@@ -58,6 +59,7 @@ const Index = () => {
         </CardMedia>
         <CardContent>
           <Typography>Welcome to the MERN Skeleton home page.</Typography>
+          <Link href={"/users"}>Users</Link>
         </CardContent>
       </Card>
     </Container>
