@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import { Error } from "@mui/icons-material";
 import Link from "next/link";
-import { UseStylesProps, UserProps } from "./";
+import { UseStylesProps, UserProps } from "./types";
 import { create } from "../../lib/api-user";
 
 const useStyles = (): UseStylesProps => ({
