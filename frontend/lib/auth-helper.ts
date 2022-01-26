@@ -17,11 +17,11 @@ _id: "61e59ee3e46097a260807fc5" */
   },
   isAuthenticated() {
     // let test = typeof window == "undefined" && !sessionStorage.getItem("jwt");
-    let jwt = sessionStorage.getItem("jwt");
+    // let jwt = sessionStorage.getItem("jwt");
 
     if (typeof window == "undefined") return false;
-    if (jwt) {
-      let parsedJwt = JSON.parse(jwt);
+    if (sessionStorage.getItem("jwt")) {
+      let parsedJwt = JSON.parse(sessionStorage.getItem("jwt"));
       console.log(parsedJwt, "este es el token");
       return parsedJwt;
     }
