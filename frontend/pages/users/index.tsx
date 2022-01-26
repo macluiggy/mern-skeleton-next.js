@@ -15,8 +15,7 @@ import { SxProps } from "@mui/material";
 import { path } from "../../config";
 import { list } from "../../lib/api-user";
 import { Container } from "../../components/Container";
-import { Fragment } from "react";
-import { useState, useEffect } from "react";
+import { Fragment, useState, useEffect } from "react";
 
 type UseStylesProps = {
   root: SxProps;
