@@ -12,7 +12,7 @@ import {
 import { Person, ArrowForward } from "@mui/icons-material";
 import Link from "next/link";
 import { SxProps } from "@mui/material";
-import { path } from "../../config";
+// import { path } from "../../config";
 import { list } from "../../lib/api-user";
 import { Container } from "../../components/Container";
 import { Fragment, useState, useEffect } from "react";
