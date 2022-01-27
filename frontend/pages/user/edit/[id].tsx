@@ -20,7 +20,7 @@ export default function PrivateRoute() {
   }, []);
   return (
     <div title="Redirecting">
-      <EditProfile /* userId={id} */ />
+      <EditProfile userId={id} />
     </div>
   );
 }

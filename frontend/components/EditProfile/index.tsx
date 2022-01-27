@@ -22,10 +22,10 @@ import { Container } from "../Container";
 import { Error } from "@mui/icons-material";
 import { useRouter } from "next/router";
 
-export default function EditProfile() {
-  const router = useRouter();
-  const { id } = router.query;
-  console.log(router.query);
+export default function EditProfile({ userId }) {
+  // const router = useRouter();
+  // const { id } = router.query;
+  // console.log(router.query);
   const classes = useStyles();
   const [values, setValues] = useState<PropValues>({
     name: "",
@@ -41,7 +41,7 @@ export default function EditProfile() {
     const abortController = new AbortController();
     const signal = abortController.signal;
 
-    read({ userId: id.toString() }, { t: jwt.token }, signal).then((data) => {
+    read({ userId: userId }, { t: jwt.token }, signal).then((data) => {
       // const { email, name } = data;
       if (data && data.error) {
         setValues({ ...values, error: data.error });
@@ -53,7 +53,7 @@ export default function EditProfile() {
     return () => {
       abortController.abort();
     };
-  }, [id]);
+  }, [userId]);
 
   const clickSubmit = () => {
     const user = {
@@ -61,7 +61,7 @@ export default function EditProfile() {
       email: values.email,
       password: values.password,
     };
-    update({ userId: id.toString() }, { t: jwt.token }, user).then((data) => {
+    update({ userId: userId }, { t: jwt.token }, user).then((data) => {
       const { _id: userId } = data;
       if (data && data.error) {
         // console.log("an error occured");
@@ -81,7 +81,7 @@ export default function EditProfile() {
     setValues({ ...values, error: "", [name]: event.target.value });
   };
 
-  if (values.redirectToProfile) return <Redirect path={`/user/${id}`} />;
+  if (values.redirectToProfile) return <Redirect path={`/user/${userId}`} />;
 
   return (
     <Container title="Edit Profile">
@@ -136,8 +136,8 @@ export default function EditProfile() {
   );
 }
 
-export async function getServerSideProps(context) {
-  return {
-    props: {},
-  };
-}
+// export async function getServerSideProps(context) {
+//   return {
+//     props: {},
+//   };
+// }
