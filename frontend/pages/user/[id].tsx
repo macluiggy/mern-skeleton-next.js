@@ -89,7 +89,7 @@ export default function Profile() {
         <Typography variant="h6" sx={classes.title}>
           Profile
         </Typography>
-        {loading ? (
+        {process.browser && loading ? (
           <div>Loading...</div>
         ) : (
           <List dense>
