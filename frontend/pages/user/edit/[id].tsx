@@ -8,14 +8,22 @@ import { Container } from "../../../components/Container";
 export default function PrivateRoute() {
   const router = useRouter();
   const { id } = router.query;
+  if (!auth.isAuthenticated()) {
+    return <Redirect path="/signin" />;
+  }
   return (
     <Container title="Redirecting">
-      {auth.isAuthenticated() ? (
-        <EditProfile userId={id} />
-      ) : (
-        // <Redirect path="/signin" />
-        Router.push("/signin")
-      )}
+      <EditProfile userId={id} />
     </Container>
   );
+}
+
+{
+  /* <Container title="Redirecting">
+  {auth.isAuthenticated() ? (
+    <EditProfile userId={id} />
+  ) : (
+    <Redirect path="/signin" />
+  )}
+</Container>; */
 }
