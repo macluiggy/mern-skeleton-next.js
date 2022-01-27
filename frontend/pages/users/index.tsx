@@ -34,6 +34,7 @@ const useStyles = (): UseStylesProps => ({
 
 const Users = () => {
   const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
   const classes = useStyles();
   useEffect(() => {
     const abortController = new AbortController();
@@ -43,6 +44,7 @@ const Users = () => {
       // console.log(data);
 
       setUsers(data);
+      setLoading(false);
     });
 
     return function cleanup() {
@@ -56,27 +58,31 @@ const Users = () => {
           All Users
         </Typography>
         <List dense>
-          {users.map(({ _id, name }, i) => {
-            return (
-              <Fragment key={_id}>
-                <Link href="/user/[id]" as={`/user/${_id}`}>
-                  <ListItem button>
-                    <ListItemAvatar>
-                      <Avatar>
-                        <Person />
-                      </Avatar>
-                    </ListItemAvatar>
-                    <ListItemText primary={name} />
-                    <ListItemSecondaryAction>
-                      <IconButton>
-                        <ArrowForward />
-                      </IconButton>
-                    </ListItemSecondaryAction>
-                  </ListItem>
-                </Link>
-              </Fragment>
-            );
-          })}
+          {loading ? (
+            <div>loading</div>
+          ) : (
+            users.map(({ _id, name }, i) => {
+              return (
+                <Fragment key={_id}>
+                  <Link href="/user/[id]" as={`/user/${_id}`}>
+                    <ListItem button>
+                      <ListItemAvatar>
+                        <Avatar>
+                          <Person />
+                        </Avatar>
+                      </ListItemAvatar>
+                      <ListItemText primary={name} />
+                      <ListItemSecondaryAction>
+                        <IconButton>
+                          <ArrowForward />
+                        </IconButton>
+                      </ListItemSecondaryAction>
+                    </ListItem>
+                  </Link>
+                </Fragment>
+              );
+            })
+          )}
         </List>
       </Paper>
     </Container>

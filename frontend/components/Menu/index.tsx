@@ -12,6 +12,9 @@ const isActive = (currentPathname: string, pathname: string) => {
 
 export default function Menu() {
   // const { pathname, push } = useRouter();
+  // if (process.browser) {
+  //   // client-side-only code
+  // }
   const router = useRouter();
   const pathname = router.pathname;
   const push = router.push;
