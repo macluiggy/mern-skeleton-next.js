@@ -9,7 +9,7 @@ export default function PrivateRoute() {
   const router = useRouter();
   const { id } = router.query;
   if (!auth.isAuthenticated()) {
-    return <Redirect path="/signin" />;
+    return Router.push("/signin");
   }
   return (
     <Container title="Redirecting">
