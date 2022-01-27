@@ -41,7 +41,7 @@ const Users = () => {
     const signal = abortController.signal;
     list(signal).then((data) => {
       if (data && data.error) return console.log(data.error);
-      // console.log(data);
+      // console.log(data);d
 
       setUsers(data);
       setLoading(false);
