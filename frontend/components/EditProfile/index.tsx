@@ -37,9 +37,9 @@ export default function EditProfile({ userId }) {
     const signal = abortController.signal;
 
     read({ userId: userId }, { t: jwt.token }, signal).then((data) => {
-      const { error, email, name } = data;
-      if (data && error) {
-        setValues({ ...values, error });
+      const { email, name } = data;
+      if (data && data.error) {
+        setValues({ ...values, error: data.error });
       } else {
         setValues({ ...values, name, email });
       }

@@ -55,7 +55,6 @@ export default function Profile() {
     const t = typeof jwt === "boolean" ? jwt : jwt.token;
     read({ userId: id.toString() }, { t }, signal).then((data) => {
       // console.log(data);
-
       if (data && data.error) {
         setRedirectToSignin(true);
       } else {
