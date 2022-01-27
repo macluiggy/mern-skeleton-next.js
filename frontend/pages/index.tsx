@@ -55,6 +55,7 @@ const Index = () => {
             alt="Unicorn Bicycle"
             layout="fill"
             objectFit="cover"
+            priority={true}
           />
         </CardMedia>
         <CardContent>

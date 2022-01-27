@@ -41,29 +41,25 @@ export default function DeleteUser({ userId }) {
   }
 
   return (
-    <Container title="Delete Account">
-      <span>
-        <IconButton aria-label="Delete" onClick={clickButton} color="secondary">
-          <DeleteIcon />
-        </IconButton>
+    <span>
+      <IconButton aria-label="Delete" onClick={clickButton} color="secondary">
+        <DeleteIcon />
+      </IconButton>
 
-        <Dialog open={open} onClose={handleRequestClose}>
-          <DialogTitle>{"Delete Account"}</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              Confirm to delete your account.
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleRequestClose} color="primary">
-              Cancel
-            </Button>
-            <Button onClick={deleteAccount} color="secondary" autoFocus>
-              Confirm
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </span>
-    </Container>
+      <Dialog open={open} onClose={handleRequestClose}>
+        <DialogTitle>{"Delete Account"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>Confirm to delete your account.</DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleRequestClose} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={deleteAccount} color="secondary" autoFocus>
+            Confirm
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </span>
   );
 }

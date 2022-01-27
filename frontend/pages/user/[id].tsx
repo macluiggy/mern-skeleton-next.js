@@ -22,6 +22,7 @@ import { useState, useEffect } from "react";
 import { UseStylesProps } from "../../types/user";
 import { useRouter } from "next/router";
 import DeleteUser from "../../components/DeleteUser";
+import { Container } from "../../components/Container";
 
 const useStyles = (): UseStylesProps => ({
   root: {
@@ -81,38 +82,40 @@ export default function Profile() {
 
   if (redirectToSignin) return <Redirect path={"/signin"} />;
   return (
-    <Paper sx={classes.root}>
-      <Typography variant="h6" sx={classes.title}>
-        Profile
-      </Typography>
-      <List dense>
-        <ListItem>
-          <ListItemAvatar>
-            <Avatar>
-              <Person />
-            </Avatar>
-          </ListItemAvatar>
-          <ListItemText primary={user.name} secondary={user.email} />{" "}
-          {auth.isAuthenticated().user &&
-            auth.isAuthenticated().user._id == user._id && (
-              <ListItemSecondaryAction>
-                <Link href={`/user/edit/${user._id}`}>
-                  <IconButton aria-label="Edit" color="primary">
-                    <Edit />
-                  </IconButton>
-                </Link>
-                <DeleteUser userId={user._id} />
-              </ListItemSecondaryAction>
-            )}
-        </ListItem>
-        <Divider />
-        <ListItem>
-          <ListItemText
-            primary={`Joined: ${new Date(user.created || "").toDateString()}`}
-          />
-        </ListItem>
-      </List>
-    </Paper>
+    <Container title="Profile">
+      <Paper sx={classes.root}>
+        <Typography variant="h6" sx={classes.title}>
+          Profile
+        </Typography>
+        <List dense>
+          <ListItem>
+            <ListItemAvatar>
+              <Avatar>
+                <Person />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText primary={user.name} secondary={user.email} />{" "}
+            {auth.isAuthenticated().user &&
+              auth.isAuthenticated().user._id == user._id && (
+                <ListItemSecondaryAction>
+                  <Link href={`/user/edit/${user._id}`}>
+                    <IconButton aria-label="Edit" color="primary">
+                      <Edit />
+                    </IconButton>
+                  </Link>
+                  <DeleteUser userId={user._id} />
+                </ListItemSecondaryAction>
+              )}
+          </ListItem>
+          <Divider />
+          <ListItem>
+            <ListItemText
+              primary={`Joined: ${new Date(user.created || "").toDateString()}`}
+            />
+          </ListItem>
+        </List>
+      </Paper>
+    </Container>
   );
 }
 

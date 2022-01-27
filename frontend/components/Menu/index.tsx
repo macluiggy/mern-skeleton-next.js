@@ -10,8 +10,16 @@ const isActive = (currentPathname: string, pathname: string) => {
     : { color: "#ffffff" };
 };
 export default function Menu() {
-  const { pathname, push } = useRouter();
-  // console.log(router.pathname);
+  // const { pathname, push } = useRouter();
+  const router = useRouter();
+  const pathname = router.pathname;
+  const push = router.push;
+  let id = "";
+  if (pathname == "/user/[id]") {
+    id = router.query.id.toString();
+  }
+  console.log(pathname, "here is pathname");
+  console.log(id, "here is the id");
   return (
     <AppBar position="static">
       <Toolbar>
@@ -38,10 +46,13 @@ export default function Menu() {
         )}
         {auth.isAuthenticated() && (
           <span>
-            <Link href={`/user/${auth.isAuthenticated().user._id}`}>
+            <Link
+              href="/user/[id]"
+              as={`/user/${auth.isAuthenticated().user._id}`}
+            >
               <Button
                 style={isActive(
-                  pathname,
+                  pathname.replace("[id]", id.toString()),
                   `/user/${auth.isAuthenticated().user._id}`
                 )}
               >
