@@ -9,6 +9,7 @@ const isActive = (currentPathname: string, pathname: string) => {
     ? { color: "#f50057" }
     : { color: "#ffffff" };
 };
+const isMyProdfile = (path) => path === "/user/[id]";
 export default function Menu() {
   // const { pathname, push } = useRouter();
   const router = useRouter();
