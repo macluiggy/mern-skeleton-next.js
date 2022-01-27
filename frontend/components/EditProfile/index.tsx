@@ -126,7 +126,7 @@ export default function EditProfile({ userId }) {
             </Typography>
           )}
         </CardContent>
-        <CardActions>
+        <CardActions sx={classes.cardActions}>
           <Button color="primary" variant="contained" onClick={clickSubmit}>
             Submit
           </Button>
