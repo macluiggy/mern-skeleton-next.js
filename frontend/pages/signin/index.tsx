@@ -16,36 +16,11 @@ import {
 } from "@mui/material";
 import Link from "next/link";
 import { iUserSignIn } from "../../lib/types";
-import { UseStylesProps } from "../../types/signin";
+import { UseStylesProps, useStyles } from "../../types/signin";
 import auth from "../../lib/auth-helper";
 import Redirect from "../../components/Redirect";
+import { Container } from "../../components/Container";
 // import Router from "next/router";
-
-const useStyles = (): UseStylesProps => ({
-  card: {
-    maxWidth: "600px",
-    margin: "0 auto",
-    textAlign: "center",
-    marginTop: "1rem",
-    paddingBottom: "1rem",
-  },
-  error: {
-    verticalAlign: "middle",
-  },
-  title: {
-    marginTop: "1rem",
-    color: "black",
-  },
-  textField: {
-    marginLeft: "1rem",
-    marginRight: "1rem",
-    width: 300,
-  },
-  submit: {
-    margin: "auto0",
-    marginBottom: "1rem",
-  },
-});
 
 export default function Signin() {
   const classes = useStyles();
@@ -84,7 +59,7 @@ export default function Signin() {
   if (redirectToReferrer) return <Redirect path="/" />;
 
   return (
-    <div>
+    <Container title="Sign In">
       <Card sx={classes.card}>
         <CardContent>
           <Typography variant="h6" sx={classes.title}>
@@ -119,7 +94,7 @@ export default function Signin() {
             </Typography>
           )}
         </CardContent>
-        <CardActions>
+        <CardActions sx={classes.cardActions}>
           <Button
             color="primary"
             variant="contained"
@@ -130,6 +105,6 @@ export default function Signin() {
           </Button>
         </CardActions>
       </Card>
-    </div>
+    </Container>
   );
 }

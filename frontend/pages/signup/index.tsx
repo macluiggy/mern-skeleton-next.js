@@ -17,6 +17,7 @@ import { Error } from "@mui/icons-material";
 import Link from "next/link";
 import { UserProps, useStyles } from "../../types/signup";
 import { create } from "../../lib/api-user";
+import { Container } from "../../components/Container";
 
 export default function Signup() {
   const classes = useStyles();
@@ -45,7 +46,7 @@ export default function Signup() {
     });
   };
   return (
-    <div>
+    <Container title="Sign Up">
       <Card sx={classes.card}>
         <CardContent>
           <Typography variant="h6" sx={classes.title}>
@@ -89,7 +90,7 @@ export default function Signup() {
             </Typography>
           )}
         </CardContent>
-        <CardActions>
+        <CardActions sx={classes.cardActions}>
           <Button
             color="primary"
             variant="contained"
@@ -115,6 +116,6 @@ export default function Signup() {
           </Link>
         </DialogActions>
       </Dialog>
-    </div>
+    </Container>
   );
 }
