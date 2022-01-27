@@ -107,4 +107,9 @@ const Users = () => {
 //     },
 //   };
 // }
+export async function getServerSideProps() {
+  return {
+    props: {},
+  };
+}
 export default Users;
