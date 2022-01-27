@@ -1,6 +1,12 @@
 import Head from "next/head";
 
-export const Container = ({ title, children }) => {
+export const Container = ({
+  title,
+  children,
+}: {
+  title?: string;
+  children: any;
+}) => {
   return (
     <div>
       <Head>

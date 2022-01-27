@@ -21,6 +21,7 @@ import auth from "../../lib/auth-helper";
 import { useState, useEffect } from "react";
 import { UseStylesProps } from "../../types/user";
 import { useRouter } from "next/router";
+import DeleteUser from "../../components/DeleteUser";
 
 const useStyles = (): UseStylesProps => ({
   root: {
@@ -89,7 +90,7 @@ export default function Profile() {
                     <Edit />
                   </IconButton>
                 </Link>
-                {/* <DeleteUser userId={user._id} /> */}
+                <DeleteUser userId={user._id} />
               </ListItemSecondaryAction>
             )}
         </ListItem>
