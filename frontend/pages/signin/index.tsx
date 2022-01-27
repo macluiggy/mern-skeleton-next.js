@@ -14,6 +14,7 @@ import {
   DialogContentText,
   DialogActions,
 } from "@mui/material";
+import { Error } from "@mui/icons-material";
 import Link from "next/link";
 import { iUserSignIn } from "../../lib/types";
 import { UseStylesProps, useStyles } from "../../types/signin";
@@ -88,7 +89,7 @@ export default function Signin() {
           {values.error && (
             <Typography component="p" color="error">
               <Icon color="error" sx={classes.error}>
-                error
+                <Error />
               </Icon>
               {values.error}
             </Typography>
