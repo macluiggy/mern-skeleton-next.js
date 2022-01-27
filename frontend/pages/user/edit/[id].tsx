@@ -8,7 +8,7 @@ import { Container } from "../../../components/Container";
 export default function PrivateRoute() {
   const router = useRouter();
   const { id } = router.query;
-  if (!auth.isAuthenticated()) {
+  if (!auth.isAuthenticated() && window !== undefined) {
     return router.push("/signin");
   }
   return (
