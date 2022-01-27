@@ -59,7 +59,7 @@ const Users = () => {
           {users.map(({ _id, name }, i) => {
             return (
               <Fragment key={_id}>
-                <Link href={`/user/${_id}`}>
+                <Link href="/user/[id]" as={`/user/${_id}`}>
                   <ListItem button>
                     <ListItemAvatar>
                       <Avatar>
