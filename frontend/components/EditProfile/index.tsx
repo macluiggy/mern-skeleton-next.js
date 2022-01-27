@@ -19,8 +19,13 @@ import {
 } from "../../types/EditProfile";
 import Redirect from "../Redirect";
 import { Container } from "../Container";
+import { Error } from "@mui/icons-material";
+import { useRouter } from "next/router";
 
-export default function EditProfile({ userId }) {
+export default function EditProfile() {
+  const router = useRouter();
+  const { id } = router.query;
+  console.log(router.query);
   const classes = useStyles();
   const [values, setValues] = useState<PropValues>({
     name: "",
@@ -36,19 +41,19 @@ export default function EditProfile({ userId }) {
     const abortController = new AbortController();
     const signal = abortController.signal;
 
-    read({ userId: userId }, { t: jwt.token }, signal).then((data) => {
-      const { email, name } = data;
+    read({ userId: id.toString() }, { t: jwt.token }, signal).then((data) => {
+      // const { email, name } = data;
       if (data && data.error) {
         setValues({ ...values, error: data.error });
       } else {
-        setValues({ ...values, name, email });
+        setValues({ ...values, name: data.name, email: data.email });
       }
     });
     //
     return () => {
       abortController.abort();
     };
-  }, [userId]);
+  }, [id]);
 
   const clickSubmit = () => {
     const user = {
@@ -56,7 +61,7 @@ export default function EditProfile({ userId }) {
       email: values.email,
       password: values.password,
     };
-    update({ userId: userId }, { t: jwt.token }, user).then((data) => {
+    update({ userId: id.toString() }, { t: jwt.token }, user).then((data) => {
       const { _id: userId } = data;
       if (data && data.error) {
         // console.log("an error occured");
@@ -76,7 +81,7 @@ export default function EditProfile({ userId }) {
     setValues({ ...values, error: "", [name]: event.target.value });
   };
 
-  if (values.redirectToProfile) return <Redirect path={`/user/${userId}`} />;
+  if (values.redirectToProfile) return <Redirect path={`/user/${id}`} />;
 
   return (
     <Container title="Edit Profile">
@@ -114,6 +119,7 @@ export default function EditProfile({ userId }) {
           {values.error && (
             <Typography component="p" color="error">
               <Icon color="error" sx={classes.error}>
+                <Error />
                 error
               </Icon>
               {values.error}
@@ -128,4 +134,10 @@ export default function EditProfile({ userId }) {
       </Card>
     </Container>
   );
+}
+
+export async function getServerSideProps(context) {
+  return {
+    props: {},
+  };
 }

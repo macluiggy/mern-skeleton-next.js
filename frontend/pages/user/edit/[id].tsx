@@ -19,9 +19,9 @@ export default function PrivateRoute() {
     redirect();
   }, []);
   return (
-    <Container title="Redirecting">
-      <EditProfile userId={id} />
-    </Container>
+    <div title="Redirecting">
+      <EditProfile /* userId={id} */ />
+    </div>
   );
 }
 
@@ -33,4 +33,9 @@ export default function PrivateRoute() {
     <Redirect path="/signin" />
   )}
 </Container>; */
+}
+export async function getServerSideProps(context) {
+  return {
+    props: {},
+  };
 }
