@@ -57,10 +57,10 @@ export default function EditProfile({ userId }) {
       password: values.password,
     };
     update({ userId: userId }, { t: jwt.token }, user).then((data) => {
-      const { error, _id: userId } = data;
-      if (data && error) {
+      const { _id: userId } = data;
+      if (data && data.error) {
         // console.log("an error occured");
-        setValues({ ...values, error });
+        setValues({ ...values, error: data.error });
       } else {
         // console.log("user updated");
         setValues({
