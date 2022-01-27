@@ -15,21 +15,8 @@ import {
 } from "@mui/material";
 import { Error } from "@mui/icons-material";
 import Link from "next/link";
-import { UseStylesProps, UserProps } from "../../types/signup";
+import { UserProps, useStyles } from "../../types/signup";
 import { create } from "../../lib/api-user";
-
-const useStyles = (): UseStylesProps => ({
-  card: {
-    maxWidth: "600px",
-    margin: "0 auto",
-    textAlign: "center",
-    paddingBottom: "1rem",
-  },
-  error: {},
-  title: {},
-  textField: {},
-  submit: {},
-});
 
 export default function Signup() {
   const classes = useStyles();
