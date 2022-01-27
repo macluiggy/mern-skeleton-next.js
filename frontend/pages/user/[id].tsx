@@ -43,17 +43,18 @@ export default function Profile() {
     name: "",
     email: "",
     created: "",
-    _id: "",
+    _id: `${id}` || localStorage.getItem("id"),
   });
   const [redirectToSignin, setRedirectToSignin] = useState(false);
   const jwt = auth.isAuthenticated();
 
   useEffect(() => {
+    localStorage.setItem("id", `${id}`);
     const abortController = new AbortController();
     const signal = abortController.signal;
     // console.log(jwt);
     const t = typeof jwt === "boolean" ? jwt : jwt.token;
-    read({ userId: id.toString() }, { t }, signal).then((data) => {
+    read({ userId: user._id }, { t }, signal).then((data) => {
       // console.log(data);
       if (data && data.error) {
         setRedirectToSignin(true);
@@ -138,3 +139,9 @@ export default function Profile() {
 //     },
 //   };
 // }
+
+export async function getServerSideProps(context) {
+  return {
+    props: {},
+  };
+}
