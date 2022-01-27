@@ -1,4 +1,3 @@
-import React from "react";
 import { list, read } from "../../lib/api-user";
 import { UserProps } from "../../types/user";
 import { path } from "../../config";
@@ -40,7 +39,7 @@ export default function Profile() {
   const classes = useStyles();
   const router = useRouter();
   const { id } = router.query;
-  // const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<UserProps>({
     name: "",
     email: "",
@@ -73,7 +72,7 @@ export default function Profile() {
         setRedirectToSignin(true);
       } else {
         setUser(data);
-        // setLoading(false);
+        setLoading(false);
       }
     });
 
@@ -89,33 +88,39 @@ export default function Profile() {
         <Typography variant="h6" sx={classes.title}>
           Profile
         </Typography>
-        <List dense>
-          <ListItem>
-            <ListItemAvatar>
-              <Avatar>
-                <Person />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary={user.name} secondary={user.email} />{" "}
-            {auth.isAuthenticated().user &&
-              auth.isAuthenticated().user._id == user._id && (
-                <ListItemSecondaryAction>
-                  <Link href="/user/edit/[id]" as={`/user/edit/${user._id}`}>
-                    <IconButton aria-label="Edit" color="primary">
-                      <Edit />
-                    </IconButton>
-                  </Link>
-                  <DeleteUser userId={user._id} />
-                </ListItemSecondaryAction>
-              )}
-          </ListItem>
-          <Divider />
-          <ListItem>
-            <ListItemText
-              primary={`Joined: ${new Date(user.created || "").toDateString()}`}
-            />
-          </ListItem>
-        </List>
+        {loading ? (
+          <div>Loading...</div>
+        ) : (
+          <List dense>
+            <ListItem>
+              <ListItemAvatar>
+                <Avatar>
+                  <Person />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText primary={user.name} secondary={user.email} />{" "}
+              {auth.isAuthenticated().user &&
+                auth.isAuthenticated().user._id == user._id && (
+                  <ListItemSecondaryAction>
+                    <Link href="/user/edit/[id]" as={`/user/edit/${user._id}`}>
+                      <IconButton aria-label="Edit" color="primary">
+                        <Edit />
+                      </IconButton>
+                    </Link>
+                    <DeleteUser userId={user._id} />
+                  </ListItemSecondaryAction>
+                )}
+            </ListItem>
+            <Divider />
+            <ListItem>
+              <ListItemText
+                primary={`Joined: ${new Date(
+                  user.created || ""
+                ).toDateString()}`}
+              />
+            </ListItem>
+          </List>
+        )}
       </Paper>
     </Container>
   );
