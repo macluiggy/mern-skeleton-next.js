@@ -43,18 +43,29 @@ export default function Profile() {
     name: "",
     email: "",
     created: "",
-    _id: `${id}` || localStorage.getItem("id"),
+    _id: "",
   });
+  // const [userId, setUserId] = useState<string>("");
   const [redirectToSignin, setRedirectToSignin] = useState(false);
   const jwt = auth.isAuthenticated();
 
+  // const loadUser = async () => {
+  //   if (router && router.query) {
+  //     console.log(router.query);
+  //     setUserId(router.query.id.toString());
+  //   }
+  //   return await userId;
+  // };
   useEffect(() => {
-    localStorage.setItem("id", `${id}`);
+    // localStorage.setItem("id", `${id}`);
+    // let id = loadUser();
     const abortController = new AbortController();
     const signal = abortController.signal;
     // console.log(jwt);
+    // console.log(userId);
+
     const t = typeof jwt === "boolean" ? jwt : jwt.token;
-    read({ userId: user._id }, { t }, signal).then((data) => {
+    read({ userId: id.toString() }, { t }, signal).then((data) => {
       // console.log(data);
       if (data && data.error) {
         setRedirectToSignin(true);
@@ -66,7 +77,7 @@ export default function Profile() {
     return () => {
       abortController.abort();
     };
-  }, [id]);
+  }, []);
 
   if (redirectToSignin) return <Redirect path={"/signin"} />;
   return (

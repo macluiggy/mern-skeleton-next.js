@@ -22,7 +22,7 @@ _id: "61e59ee3e46097a260807fc5" */
     if (typeof window == "undefined") return false;
     if (sessionStorage.getItem("jwt")) {
       let parsedJwt = JSON.parse(sessionStorage.getItem("jwt"));
-      console.log(parsedJwt, "este es el token");
+      // console.log(parsedJwt, "este es el token");
       return parsedJwt;
     }
     // parse method is the opposite of stringify
