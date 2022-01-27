@@ -40,7 +40,7 @@ export default function Profile() {
   const classes = useStyles();
   const router = useRouter();
   const { id } = router.query;
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<UserProps>({
     name: "",
     email: "",
@@ -73,7 +73,7 @@ export default function Profile() {
         setRedirectToSignin(true);
       } else {
         setUser(data);
-        setLoading(false);
+        // setLoading(false);
       }
     });
 
