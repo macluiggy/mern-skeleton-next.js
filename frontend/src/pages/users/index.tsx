@@ -69,7 +69,7 @@ const Users = ({ users: _users }) => {
               return (
                 <Fragment key={_id}>
                   <Link href="/user/[id]" as={`/user/${_id}`}>
-                    <a>
+                    <a onClick={() => setLoading(true)}>
                       <ListItem button>
                         <ListItemAvatar>
                           <Avatar>
