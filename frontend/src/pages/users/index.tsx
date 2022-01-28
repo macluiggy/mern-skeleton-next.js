@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { Person, ArrowForward } from "@mui/icons-material";
 import Link from "next/link";
-import { SxProps } from "@mui/material";
+import { SxProps, CircularProgress } from "@mui/material";
 // import { path } from "../../config";
 import { list } from "../../lib/api-user";
 import { Container } from "../../components/Container";
@@ -36,6 +36,7 @@ const useStyles = (): UseStylesProps => ({
 const Users = ({ users: _users }) => {
   const [users, setUsers] = useState(_users);
   const [loading, setLoading] = useState(true);
+  const [currentId, setCurrentId] = useState("");
   const classes = useStyles();
   const router = useRouter();
   useEffect(() => {
@@ -69,11 +70,15 @@ const Users = ({ users: _users }) => {
               return (
                 <Fragment key={_id}>
                   <Link href="/user/[id]" as={`/user/${_id}`}>
-                    <a onClick={() => setLoading(true)}>
+                    <a onClick={() => setCurrentId(_id)}>
                       <ListItem button>
                         <ListItemAvatar>
                           <Avatar>
-                            <Person />
+                            {currentId === _id ? (
+                              <CircularProgress />
+                            ) : (
+                              <Person />
+                            )}
                           </Avatar>
                         </ListItemAvatar>
                         <ListItemText primary={name} />
