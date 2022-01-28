@@ -31,9 +31,11 @@ export default function Menu() {
           MERN Skeleton
         </Typography>
         <Link href="/">
-          <IconButton aria-label="Home" style={isActive(pathname, "/")}>
-            <HomeIcon />
-          </IconButton>
+          <a>
+            <IconButton aria-label="Home" style={isActive(pathname, "/")}>
+              <HomeIcon />
+            </IconButton>
+          </a>
         </Link>
         <Link href="/users">
           <a>
@@ -43,10 +45,14 @@ export default function Menu() {
         {!auth.isAuthenticated() && (
           <span>
             <Link href="/signup">
-              <Button style={isActive(pathname, "/signup")}>Sign Up</Button>
+              <a>
+                <Button style={isActive(pathname, "/signup")}>Sign Up</Button>
+              </a>
             </Link>
             <Link href="/signin">
-              <Button style={isActive(pathname, "/signin")}>Sign In</Button>
+              <a>
+                <Button style={isActive(pathname, "/signin")}>Sign In</Button>
+              </a>
             </Link>
           </span>
         )}
@@ -56,23 +62,27 @@ export default function Menu() {
               href="/user/[id]"
               as={`/user/${auth.isAuthenticated().user._id}`}
             >
-              <Button
-                style={isActive(
-                  pathname.replace("[id]", id.toString()),
-                  `/user/${auth.isAuthenticated().user._id}`
-                )}
-              >
-                My Profile
-              </Button>
+              <a>
+                <Button
+                  style={isActive(
+                    pathname.replace("[id]", id.toString()),
+                    `/user/${auth.isAuthenticated().user._id}`
+                  )}
+                >
+                  My Profile
+                </Button>
+              </a>
             </Link>
-            <Button
-              color="inherit"
-              onClick={() => {
-                auth.clearJWT(() => push("/"));
-              }}
-            >
-              Sign out
-            </Button>
+            <a>
+              <Button
+                color="inherit"
+                onClick={() => {
+                  auth.clearJWT(() => push("/"));
+                }}
+              >
+                Sign out
+              </Button>
+            </a>
           </span>
         )}
       </Toolbar>
