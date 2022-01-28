@@ -65,7 +65,7 @@ export default function Menu() {
               <a>
                 <Button
                   style={isActive(
-                    pathname.replace("[id]", id.toString()),
+                    pathname.replace("[id]", id),
                     `/user/${auth.isAuthenticated().user._id}`
                   )}
                 >

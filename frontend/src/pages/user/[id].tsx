@@ -37,8 +37,8 @@ const useStyles = (): UseStylesProps => ({
 });
 export default function Profile({ userId }) {
   const classes = useStyles();
-  const router = useRouter();
-  const { id } = router.query;
+  // const router = useRouter();
+  // const { id } = router.query;
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<UserProps>({
     name: "",
@@ -50,13 +50,13 @@ export default function Profile({ userId }) {
   const [redirectToSignin, setRedirectToSignin] = useState(false);
   const jwt = auth.isAuthenticated();
 
-  const loadUser = async () => {
-    if (router && router.query) {
-      console.log(router.query);
-      // setUserId(router.query.id.toString());
-    }
-    return await userId;
-  };
+  // const loadUser = async () => {
+  //   if (router && router.query) {
+  //     console.log(router.query);
+  //     // setUserId(router.query.id.toString());
+  //   }
+  //   return await userId;
+  // };
   useEffect(() => {
     // localStorage.setItem("id", `${id}`);
     // let id = loadUser();
