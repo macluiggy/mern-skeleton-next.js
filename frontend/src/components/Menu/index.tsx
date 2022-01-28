@@ -75,7 +75,6 @@ export default function Menu() {
             </Link>
             <a>
               <Button
-                color="inherit"
                 onClick={() => {
                   auth.clearJWT(() => push("/"));
                 }}
