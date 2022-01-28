@@ -37,8 +37,7 @@ const Users = ({ users }) => {
   const [loading, setLoading] = useState(false);
   const classes = useStyles();
   useEffect(() => {
-    console.table(users);
-
+    // console.table(users);
     // const abortController = new AbortController();
     // const signal = abortController.signal;
     // list().then((data) => {

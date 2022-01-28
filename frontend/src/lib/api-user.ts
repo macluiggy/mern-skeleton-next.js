@@ -28,14 +28,14 @@ const list /*: TList */ = async () => {
   }
 };
 
-const read: TRead = async (params, credentials, signal) => {
+const read: TRead = async (params, credentials) => {
   // console.log(path);
   try {
     // console.log(credentials.t);
 
     let response = await fetch(`${path}/api/users/${params.userId}`, {
       method: "GET",
-      signal: signal, // cancel request if signal is canceled
+      // signal: signal, // cancel request if signal is canceled
       headers: {
         Accept: "application/json",
         ContentType: "application/json",

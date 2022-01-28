@@ -30,7 +30,7 @@ export type TList = (signal: AbortSignal) =>
 export type TRead = (
   params: { userId: string },
   credentials: { t: string | boolean },
-  signal: AbortSignal
+  signal?: AbortSignal
 ) => Promise<{
   _id: string;
   name: string;

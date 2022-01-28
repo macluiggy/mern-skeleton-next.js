@@ -22,8 +22,8 @@ export default function Menu() {
   if (pathname == "/user/[id]") {
     id = router.query.id.toString();
   }
-  console.log(pathname, "here is pathname");
-  console.log(id, "here is the id");
+  // console.log(pathname, "here is pathname");
+  // console.log(id, "here is the id");
   return (
     <AppBar position="static">
       <Toolbar>
