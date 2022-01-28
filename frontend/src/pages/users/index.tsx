@@ -32,20 +32,20 @@ const useStyles = (): UseStylesProps => ({
   },
 });
 
-const Users = ({ users }) => {
-  // const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(false);
+const Users = ({ users: _users }) => {
+  const [users, setUsers] = useState(_users);
+  const [loading, setLoading] = useState(true);
   const classes = useStyles();
   useEffect(() => {
     // console.table(users);
     // const abortController = new AbortController();
     // const signal = abortController.signal;
-    // list().then((data) => {
-    //   if (data && data.error) return console.log(data.error);
-    //   // console.log(data);d
-    //   setUsers(data);
-    //   setLoading(false);
-    // });
+    list().then((data) => {
+      if (data && data.error) return console.log(data.error);
+      // console.log(data);d
+      setUsers(data);
+      setLoading(false);
+    });
     // return function cleanup() {
     //   abortController.abort();
     // };
@@ -101,7 +101,7 @@ const getUsers = async () => {
   if (data && data.error) return console.log(data.error);
   return data;
 };
-export async function getStaticProps() {
+export async function getStaticProps(context) {
   const users = await getUsers();
   return {
     props: {
