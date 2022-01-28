@@ -64,8 +64,8 @@ const Users = ({ users: _users }) => {
           ) : (
             // "hola"
             users.map(({ _id, name }, i) => {
-              if (router.isFallback)
-                return <div> Loading...... desde users component </div>;
+              // if (router.isFallback)
+              //   return <div> Loading...... desde users component </div>;
               return (
                 <Fragment key={_id}>
                   <Link href="/user/[id]" as={`/user/${_id}`}>
