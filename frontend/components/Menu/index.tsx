@@ -36,7 +36,9 @@ export default function Menu() {
           </IconButton>
         </Link>
         <Link href="/users">
-          <Button style={isActive(pathname, "/users")}>Users</Button>
+          <a>
+            <Button style={isActive(pathname, "/users")}>Users</Button>
+          </a>
         </Link>
         {!auth.isAuthenticated() && (
           <span>
