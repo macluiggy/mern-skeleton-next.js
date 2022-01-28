@@ -126,49 +126,49 @@ export default function Profile() {
   );
 }
 
-const getUsers = async () => {
-  // const abortController = new AbortController();
-  // const { signal } = abortController;
-  // list(signal).then((data) => {
-  //   if (data && data.error) return console.log(data.error);
-  // });
-  const data = await list();
-  if (data && data.error) return console.log(data.error);
-  return data; //a array of user objects
-};
+// const getUsers = async () => {
+//   // const abortController = new AbortController();
+//   // const { signal } = abortController;
+//   // list(signal).then((data) => {
+//   //   if (data && data.error) return console.log(data.error);
+//   // });
+//   const data = await list();
+//   if (data && data.error) return console.log(data.error);
+//   return data; //a array of user objects
+// };
 
-export async function getStaticPaths() {
-  const users = await getUsers();
-  // console.log(users, "from getstaticpaths");
+// export async function getStaticPaths() {
+//   const users = await getUsers();
+//   // console.log(users, "from getstaticpaths");
 
-  return {
-    paths: users.map((user: UserProps) => {
-      return { params: { id: user._id } };
-    }),
-    fallback: false,
-  };
-}
-// var jwt = auth.isAuthenticated();
-
-export async function getStaticProps({ params }) {
-  // const respnse = await fetch(`${path}/api/users/${params.id}`);
-  // const user = await respnse.json();
-  // console.log(user);
-  // console.log(jwt);
-
-  // const t = jwt.token;
-  // const user = await read({ userId: params.id }, { t });
-  // console.log(user, "from getstaticprops");
-
-  return {
-    props: {
-      userId: params.id,
-    },
-  };
-}
-
-// export async function getServerSideProps(context) {
 //   return {
-//     props: {},
+//     paths: users.map((user: UserProps) => {
+//       return { params: { id: user._id } };
+//     }),
+//     fallback: false,
 //   };
 // }
+// // var jwt = auth.isAuthenticated();
+
+// export async function getStaticProps({ params }) {
+//   // const respnse = await fetch(`${path}/api/users/${params.id}`);
+//   // const user = await respnse.json();
+//   // console.log(user);
+//   // console.log(jwt);
+
+//   // const t = jwt.token;
+//   // const user = await read({ userId: params.id }, { t });
+//   // console.log(user, "from getstaticprops");
+
+//   return {
+//     props: {
+//       userId: params.id,
+//     },
+//   };
+// }
+
+export async function getServerSideProps(context) {
+  return {
+    props: {},
+  };
+}
