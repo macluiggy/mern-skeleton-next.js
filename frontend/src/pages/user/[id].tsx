@@ -103,9 +103,11 @@ export default function Profile() {
                 auth.isAuthenticated().user._id == user._id && (
                   <ListItemSecondaryAction>
                     <Link href="/user/edit/[id]" as={`/user/edit/${user._id}`}>
-                      <IconButton aria-label="Edit" color="primary">
-                        <Edit />
-                      </IconButton>
+                      <a>
+                        <IconButton aria-label="Edit" color="primary">
+                          <Edit />
+                        </IconButton>
+                      </a>
                     </Link>
                     <DeleteUser userId={user._id} />
                   </ListItemSecondaryAction>

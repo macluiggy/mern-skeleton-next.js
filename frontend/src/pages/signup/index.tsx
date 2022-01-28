@@ -110,9 +110,11 @@ export default function Signup() {
         </DialogContent>
         <DialogActions>
           <Link href={"/signin"}>
-            <Button color="primary" autoFocus variant="contained">
-              Sign In
-            </Button>
+            <a>
+              <Button color="primary" autoFocus variant="contained">
+                Sign In
+              </Button>
+            </a>
           </Link>
         </DialogActions>
       </Dialog>

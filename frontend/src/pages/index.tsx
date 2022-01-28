@@ -60,7 +60,9 @@ const Index = () => {
         </CardMedia>
         <CardContent>
           <Typography>Welcome to the MERN Skeleton home page.</Typography>
-          <Link href={"/users"}>Users</Link>
+          {/* <Link href={"/users"}>
+            <a>Users</a>
+          </Link> */}
         </CardContent>
       </Card>
     </Container>
