@@ -75,6 +75,7 @@ export default function Menu() {
             </Link>
             <a>
               <Button
+                style={{ color: "#ffffff" }}
                 onClick={() => {
                   auth.clearJWT(() => push("/"));
                 }}
