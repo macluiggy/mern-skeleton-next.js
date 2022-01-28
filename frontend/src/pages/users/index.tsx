@@ -16,6 +16,7 @@ import { SxProps } from "@mui/material";
 import { list } from "../../lib/api-user";
 import { Container } from "../../components/Container";
 import { Fragment, useState, useEffect } from "react";
+import { useRouter } from "next/router";
 
 type UseStylesProps = {
   root: SxProps;
@@ -36,6 +37,7 @@ const Users = ({ users: _users }) => {
   const [users, setUsers] = useState(_users);
   const [loading, setLoading] = useState(true);
   const classes = useStyles();
+  const router = useRouter();
   useEffect(() => {
     // console.table(users);
     // const abortController = new AbortController();
@@ -62,6 +64,7 @@ const Users = ({ users: _users }) => {
           ) : (
             // "hola"
             users.map(({ _id, name }, i) => {
+              if (router.isFallback) return <div> Loading... </div>;
               return (
                 <Fragment key={_id}>
                   <Link href="/user/[id]" as={`/user/${_id}`}>
