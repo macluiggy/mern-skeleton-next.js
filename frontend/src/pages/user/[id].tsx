@@ -37,7 +37,7 @@ const useStyles = (): UseStylesProps => ({
 });
 export default function Profile({ userId }) {
   const classes = useStyles();
-  // const router = useRouter();
+  const router = useRouter();
   // const { id } = router.query;
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<UserProps>({
@@ -78,7 +78,7 @@ export default function Profile({ userId }) {
     //   abortController.abort();
     // };
   }, []);
-
+  if (router.isFallback) return <div>Loading....</div>;
   if (redirectToSignin) return <Redirect path={"/signin"} />;
   return (
     <Container title="Profile">
@@ -145,7 +145,7 @@ export async function getStaticPaths() {
     paths: users.map((user: UserProps) => {
       return { params: { id: user._id } };
     }),
-    fallback: "blocking",
+    fallback: true,
   };
 }
 // var jwt = auth.isAuthenticated();
