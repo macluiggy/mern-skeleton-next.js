@@ -145,7 +145,7 @@ export async function getStaticPaths() {
     paths: users.map((user: UserProps) => {
       return { params: { id: user._id } };
     }),
-    fallback: false,
+    fallback: "blocking",
   };
 }
 // var jwt = auth.isAuthenticated();
