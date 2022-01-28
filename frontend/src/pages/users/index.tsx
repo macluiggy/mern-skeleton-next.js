@@ -32,24 +32,24 @@ const useStyles = (): UseStylesProps => ({
   },
 });
 
-const Users = () => {
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
+const Users = ({ users }) => {
+  // const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(false);
   const classes = useStyles();
   useEffect(() => {
-    const abortController = new AbortController();
-    const signal = abortController.signal;
-    list(signal).then((data) => {
-      if (data && data.error) return console.log(data.error);
-      // console.log(data);d
+    console.table(users);
 
-      setUsers(data);
-      setLoading(false);
-    });
-
-    return function cleanup() {
-      abortController.abort();
-    };
+    // const abortController = new AbortController();
+    // const signal = abortController.signal;
+    // list().then((data) => {
+    //   if (data && data.error) return console.log(data.error);
+    //   // console.log(data);d
+    //   setUsers(data);
+    //   setLoading(false);
+    // });
+    // return function cleanup() {
+    //   abortController.abort();
+    // };
   }, []);
   return (
     <Container title="Users">
@@ -61,6 +61,7 @@ const Users = () => {
           {loading ? (
             <div>loading</div>
           ) : (
+            // "hola"
             users.map(({ _id, name }, i) => {
               return (
                 <Fragment key={_id}>
@@ -91,27 +92,27 @@ const Users = () => {
   );
 };
 
-// const getUsers = async () => {
-//   const abortController = new AbortController();
-//   const { signal } = abortController;
-//   // list(signal).then((data) => {
-//   //   if (data && data.error) return console.log(data.error);
-//   // });
-//   const data = await list(signal);
-//   if (data && data.error) return console.log(data.error);
-//   return data;
-// };
-// export async function getStaticProps() {
-//   const users = await getUsers();
-//   return {
-//     props: {
-//       users,
-//     },
-//   };
-// }
-export async function getServerSideProps() {
+const getUsers = async () => {
+  // const abortController = new AbortController();
+  // const { signal } = abortController;
+  // list(signal).then((data) => {
+  //   if (data && data.error) return console.log(data.error);
+  // });
+  const data = await list();
+  if (data && data.error) return console.log(data.error);
+  return data;
+};
+export async function getStaticProps() {
+  const users = await getUsers();
   return {
-    props: {},
+    props: {
+      users,
+    },
   };
 }
+// export async function getServerSideProps() {
+//   return {
+//     props: {},
+//   };
+// }
 export default Users;

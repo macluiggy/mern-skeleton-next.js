@@ -16,11 +16,11 @@ const create: TCreate = async (user) => {
   }
 };
 
-const list /*: TList */ = async (signal) => {
+const list /*: TList */ = async () => {
   try {
     let response = await fetch(`${path}/api/users`, {
       method: "GET",
-      signal: signal, // cancel request if signal is canceled
+      // signal: signal, // cancel request if signal is canceled
     });
     return await response.json();
   } catch (error) {
