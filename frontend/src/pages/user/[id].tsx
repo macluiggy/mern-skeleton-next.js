@@ -164,7 +164,7 @@ export async function getStaticProps({ params }) {
     props: {
       userId: params.id,
     },
-    revalidate: 10,
+    revalidate: 1,
   };
 }
 
