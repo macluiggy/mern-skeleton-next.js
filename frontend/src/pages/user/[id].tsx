@@ -88,7 +88,7 @@ export default function Profile() {
   //   //   abortController.abort();
   //   // };
   // }, []);
-  if (router.isReady) {
+  if (router.isReady && id) {
     const t = typeof jwt === "boolean" ? jwt : jwt.token;
     read({ userId: id.toString() }, { t }).then((data) => {
       // console.log(data);
