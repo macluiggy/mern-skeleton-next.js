@@ -6,11 +6,22 @@ import Router, { useRouter } from "next/router";
 import { Container } from "../../../components/Container";
 import { useEffect, useState } from "react";
 import { list } from "../../../lib/api-user";
+import Link from "next/link";
 
 export default function PrivateRoute({ userId }) {
   // const [id, setId] = useState("");
   const router = useRouter();
   // const { id } = router.query;
+  if (!router.isFallback && !userId) {
+    return (
+      <>
+        <h1>Please try again</h1>
+        <Link href="/">
+          <a>return to homepage</a>
+        </Link>
+      </>
+    );
+  }
   if (router.isFallback) return <div>Loading....</div>;
   const redirect = async () => {
     if (!auth.isAuthenticated()) {

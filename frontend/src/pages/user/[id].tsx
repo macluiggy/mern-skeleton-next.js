@@ -78,6 +78,16 @@ export default function Profile({ userId }) {
     //   abortController.abort();
     // };
   }, []);
+  if (!router.isFallback && !userId) {
+    return (
+      <>
+        <h1>Please try again</h1>
+        <Link href="/">
+          <a>return to homepage</a>
+        </Link>
+      </>
+    );
+  }
   if (router.isFallback) return <div>Loading....</div>;
   if (redirectToSignin) return <Redirect path={"/signin"} />;
   return (
