@@ -35,10 +35,10 @@ const useStyles = (): UseStylesProps => ({
     color: "black",
   },
 });
-export default function Profile({ userId }) {
+export default function Profile() {
   const classes = useStyles();
   const router = useRouter();
-  // const { id } = router.query;
+  const { id } = router.query;
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<UserProps>({
     name: "",
@@ -90,7 +90,7 @@ export default function Profile({ userId }) {
   // }, []);
   if (router.isReady) {
     const t = typeof jwt === "boolean" ? jwt : jwt.token;
-    read({ userId: userId }, { t }).then((data) => {
+    read({ userId: id.toString() }, { t }).then((data) => {
       // console.log(data);
       if (data && data.error) {
         setRedirectToSignin(true);
@@ -152,53 +152,53 @@ export default function Profile({ userId }) {
   );
 }
 
-const getUsers = async () => {
-  // const abortController = new AbortController();
-  // const { signal } = abortController;
-  // list(signal).then((data) => {
-  //   if (data && data.error) return console.log(data.error);
-  // });
-  const data = await list();
-  if (data && data.error) return console.log(data.error);
-  return data; //a array of user objects
-};
+// const getUsers = async () => {
+//   // const abortController = new AbortController();
+//   // const { signal } = abortController;
+//   // list(signal).then((data) => {
+//   //   if (data && data.error) return console.log(data.error);
+//   // });
+//   const data = await list();
+//   if (data && data.error) return console.log(data.error);
+//   return data; //a array of user objects
+// };
 
-export async function getStaticPaths() {
-  const users = await getUsers();
-  // console.log(users, "from getstaticpaths");
-  return {
-    paths: users.map((user: UserProps) => {
-      return { params: { id: user._id } };
-    }),
-    fallback: true,
-  };
-}
-// var jwt = auth.isAuthenticated();
-
-export async function getStaticProps({ params }) {
-  // const respnse = await fetch(`${path}/api/users/${params.id}`);
-  // const user = await respnse.json();
-  // console.log(user);
-  // console.log(jwt);
-
-  // const t = jwt.token;
-  // const user = await read({ userId: params.id }, { t });
-  // console.log(user, "from getstaticprops");
-  // if (!params.id) return {};
-  // if (!params.id)
-  //   return {
-  //     props: { userId: undefined },
-  //   };
-  return {
-    props: {
-      userId: params.id,
-    },
-    revalidate: 1,
-  };
-}
-
-// export async function getServerSideProps(context) {
+// export async function getStaticPaths() {
+//   const users = await getUsers();
+//   // console.log(users, "from getstaticpaths");
 //   return {
-//     props: {},
+//     paths: users.map((user: UserProps) => {
+//       return { params: { id: user._id } };
+//     }),
+//     fallback: true,
 //   };
 // }
+// // var jwt = auth.isAuthenticated();
+
+// export async function getStaticProps({ params }) {
+//   // const respnse = await fetch(`${path}/api/users/${params.id}`);
+//   // const user = await respnse.json();
+//   // console.log(user);
+//   // console.log(jwt);
+
+//   // const t = jwt.token;
+//   // const user = await read({ userId: params.id }, { t });
+//   // console.log(user, "from getstaticprops");
+//   // if (!params.id) return {};
+//   // if (!params.id)
+//   //   return {
+//   //     props: { userId: undefined },
+//   //   };
+//   return {
+//     props: {
+//       userId: params.id,
+//     },
+//     revalidate: 1,
+//   };
+// }
+
+// // export async function getServerSideProps(context) {
+// //   return {
+// //     props: {},
+// //   };
+// // }
