@@ -78,7 +78,7 @@ export default function Profile({ userId }) {
     //   abortController.abort();
     // };
   }, []);
-  if (!router.isFallback && !userId) {
+  if (!router.isFallback || !userId) {
     return (
       <>
         <h1>Please try again</h1>
