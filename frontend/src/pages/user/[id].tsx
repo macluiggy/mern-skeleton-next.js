@@ -78,7 +78,9 @@ export default function Profile({ userId }) {
     //   abortController.abort();
     // };
   }, []);
-  if (!router.isFallback) {
+
+  if (router.isFallback) return <div>Loading....</div>;
+  if (!router.isFallback || !userId) {
     return (
       <>
         <h1>Please try again</h1>
@@ -88,7 +90,6 @@ export default function Profile({ userId }) {
       </>
     );
   }
-  if (router.isFallback) return <div>Loading....</div>;
   if (redirectToSignin) return <Redirect path={"/signin"} />;
   return (
     <Container title="Profile">

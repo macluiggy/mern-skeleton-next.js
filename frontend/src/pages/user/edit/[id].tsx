@@ -12,7 +12,9 @@ export default function PrivateRoute({ userId }) {
   // const [id, setId] = useState("");
   const router = useRouter();
   // const { id } = router.query;
-  if (!router.isFallback) {
+
+  if (router.isFallback) return <div>Loading....</div>;
+  if (!router.isFallback || !userId) {
     return (
       <>
         <h1>Please try again</h1>
@@ -22,7 +24,6 @@ export default function PrivateRoute({ userId }) {
       </>
     );
   }
-  if (router.isFallback) return <div>Loading....</div>;
   const redirect = async () => {
     if (!auth.isAuthenticated()) {
       return <Redirect path={"/signin"} />;
