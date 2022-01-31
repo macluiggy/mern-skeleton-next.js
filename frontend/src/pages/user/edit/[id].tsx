@@ -14,24 +14,29 @@ export default function PrivateRoute({ userId }) {
   // const { id } = router.query;
 
   if (router.isFallback) return <div>Loading....</div>;
-  if (!router.isFallback && !userId) {
-    return (
-      <>
-        <h1>Please try again</h1>
-        <Link href="/">
-          <a>return to homepage</a>
-        </Link>
-      </>
-    );
-  }
-  const redirect = async () => {
+  // if (!router.isFallback && !userId) {
+  //   return (
+  //     <>
+  //       <h1>Please try again</h1>
+  //       <Link href="/">
+  //         <a>return to homepage</a>
+  //       </Link>
+  //     </>
+  //   );
+  // }
+  // const redirect = async () => {
+  //   if (!auth.isAuthenticated()) {
+  //     return <Redirect path={"/signin"} />;
+  //   }
+  // };
+  // useEffect(() => {
+  //   redirect();
+  // }, []);
+  if (router.isReady) {
     if (!auth.isAuthenticated()) {
       return <Redirect path={"/signin"} />;
     }
-  };
-  useEffect(() => {
-    redirect();
-  }, []);
+  }
   return (
     <div title="Redirecting">
       <EditProfile userId={userId} />
@@ -82,10 +87,10 @@ export async function getStaticProps({ params }) {
   // const t = jwt.token;
   // const user = await read({ userId: params.id }, { t });
   // console.log(user, "from getstaticprops");
-  if (!params.id)
-    return {
-      props: { userId: undefined },
-    };
+  // if (!params.id)
+  //   return {
+  //     props: { userId: undefined },
+  //   };
   return {
     props: {
       userId: params.id,

@@ -57,23 +57,38 @@ export default function Profile({ userId }) {
   //   }
   //   return await userId;
   // };
-  if (!router.isFallback && !userId) {
-    return (
-      <>
-        <h1>Please try again</h1>
-        <Link href="/">
-          <a>return to homepage</a>
-        </Link>
-      </>
-    );
-  }
-  useEffect(() => {
-    // localStorage.setItem("id", `${id}`);
-    // let id = loadUser();
-    // const abortController = new AbortController();
-    // const signal = abortController.signal;
-    // console.log(jwt);
-    // console.log(userId);
+  // if (!router.isFallback && !userId) {
+  //   return (
+  //     <>
+  //       <h1>Please try again</h1>
+  //       <Link href="/">
+  //         <a>return to homepage</a>
+  //       </Link>
+  //     </>
+  //   );
+  // }
+  // useEffect(() => {
+  //   // localStorage.setItem("id", `${id}`);
+  //   // let id = loadUser();
+  //   // const abortController = new AbortController();
+  //   // const signal = abortController.signal;
+  //   // console.log(jwt);
+  //   // console.log(userId);
+  //   const t = typeof jwt === "boolean" ? jwt : jwt.token;
+  //   read({ userId: userId }, { t }).then((data) => {
+  //     // console.log(data);
+  //     if (data && data.error) {
+  //       setRedirectToSignin(true);
+  //     } else {
+  //       setUser(data);
+  //       setLoading(false);
+  //     }
+  //   });
+  //   // return () => {
+  //   //   abortController.abort();
+  //   // };
+  // }, []);
+  if (router.isReady) {
     const t = typeof jwt === "boolean" ? jwt : jwt.token;
     read({ userId: userId }, { t }).then((data) => {
       // console.log(data);
@@ -84,11 +99,7 @@ export default function Profile({ userId }) {
         setLoading(false);
       }
     });
-    // return () => {
-    //   abortController.abort();
-    // };
-  }, []);
-
+  }
   if (router.isFallback) return <div>Loading....</div>;
 
   if (redirectToSignin) return <Redirect path={"/signin"} />;
@@ -171,10 +182,10 @@ export async function getStaticProps({ params }) {
   // const user = await read({ userId: params.id }, { t });
   // console.log(user, "from getstaticprops");
   // if (!params.id) return {};
-  if (!params.id)
-    return {
-      props: { userId: undefined },
-    };
+  // if (!params.id)
+  //   return {
+  //     props: { userId: undefined },
+  //   };
   return {
     props: {
       userId: params.id,
