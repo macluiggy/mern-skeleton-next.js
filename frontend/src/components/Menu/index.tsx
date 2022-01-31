@@ -1,8 +1,16 @@
-import { AppBar, Toolbar, Typography, IconButton, Button } from "@mui/material";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  IconButton,
+  Button,
+  CircularProgress,
+} from "@mui/material";
 import { Home as HomeIcon } from "@mui/icons-material";
 import Link from "next/link";
 import auth from "../../lib/auth-helper";
 import { useRouter } from "next/router";
+import { useState } from "react";
 
 const isActive = (currentPathname: string, pathname: string) => {
   return currentPathname === pathname
@@ -15,6 +23,7 @@ export default function Menu() {
   // if (process.browser) {
   //   // client-side-only code
   // }
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const pathname = router.pathname;
   const push = router.push;
@@ -68,8 +77,9 @@ export default function Menu() {
                     pathname.replace("[id]", id),
                     `/user/${auth.isAuthenticated().user._id}`
                   )}
+                  onClick={() => setLoading(true)}
                 >
-                  My Profile
+                  {loading ? <CircularProgress /> : "My Profile"}
                 </Button>
               </a>
             </Link>
