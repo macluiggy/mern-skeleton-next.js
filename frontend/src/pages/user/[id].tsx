@@ -101,7 +101,7 @@ export default function Profile({ userId }) {
     });
   }
   if (router.isFallback) {
-    router.push("/users");
+    // router.push("/users");
     return <div>Loading....</div>;
   }
 

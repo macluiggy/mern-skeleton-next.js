@@ -14,7 +14,7 @@ export default function PrivateRoute({ userId }) {
   // const { id } = router.query;
 
   if (router.isFallback) {
-    router.push("/users");
+    // router.push("/users");
     return <div>Loading....</div>;
   }
   // if (!router.isFallback && !userId) {
