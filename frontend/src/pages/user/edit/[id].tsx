@@ -11,6 +11,7 @@ export default function PrivateRoute({ userId }) {
   // const [id, setId] = useState("");
   // const router = useRouter();
   // const { id } = router.query;
+  if (router.isFallback) return <div>Loading....</div>;
   const redirect = async () => {
     if (!auth.isAuthenticated()) {
       return <Redirect path={"/signin"} />;
@@ -55,7 +56,7 @@ export async function getStaticPaths() {
     paths: users.map((user) => {
       return { params: { id: user._id } };
     }),
-    fallback: false,
+    fallback: true,
   };
 }
 // var jwt = auth.isAuthenticated();
