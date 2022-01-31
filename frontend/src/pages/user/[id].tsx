@@ -38,7 +38,7 @@ const useStyles = (): UseStylesProps => ({
 export default function Profile() {
   const classes = useStyles();
   const router = useRouter();
-  const { id } = router.query;
+  // const { id } = router.query;
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<UserProps>({
     name: "",
@@ -88,9 +88,9 @@ export default function Profile() {
   //   //   abortController.abort();
   //   // };
   // }, []);
-  if (router.isReady && id) {
+  if (router.isReady) {
     const t = typeof jwt === "boolean" ? jwt : jwt.token;
-    read({ userId: id.toString() }, { t }).then((data) => {
+    read({ userId: `${router.query.id}` }, { t }).then((data) => {
       // console.log(data);
       if (data && data.error) {
         setRedirectToSignin(true);
