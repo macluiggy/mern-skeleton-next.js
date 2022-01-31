@@ -57,6 +57,16 @@ export default function Profile({ userId }) {
   //   }
   //   return await userId;
   // };
+  if (!router.isFallback && !userId) {
+    return (
+      <>
+        <h1>Please try again</h1>
+        <Link href="/">
+          <a>return to homepage</a>
+        </Link>
+      </>
+    );
+  }
   useEffect(() => {
     // localStorage.setItem("id", `${id}`);
     // let id = loadUser();
@@ -80,16 +90,7 @@ export default function Profile({ userId }) {
   }, []);
 
   if (router.isFallback) return <div>Loading....</div>;
-  if (!router.isFallback || !userId) {
-    return (
-      <>
-        <h1>Please try again</h1>
-        <Link href="/">
-          <a>return to homepage</a>
-        </Link>
-      </>
-    );
-  }
+
   if (redirectToSignin) return <Redirect path={"/signin"} />;
   return (
     <Container title="Profile">
@@ -170,6 +171,10 @@ export async function getStaticProps({ params }) {
   // const user = await read({ userId: params.id }, { t });
   // console.log(user, "from getstaticprops");
   // if (!params.id) return {};
+  if (!params.id)
+    return {
+      props: { userId: undefined },
+    };
   return {
     props: {
       userId: params.id,

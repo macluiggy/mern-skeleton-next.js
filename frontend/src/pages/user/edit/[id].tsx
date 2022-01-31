@@ -14,7 +14,7 @@ export default function PrivateRoute({ userId }) {
   // const { id } = router.query;
 
   if (router.isFallback) return <div>Loading....</div>;
-  if (!router.isFallback || !userId) {
+  if (!router.isFallback && !userId) {
     return (
       <>
         <h1>Please try again</h1>
@@ -82,7 +82,10 @@ export async function getStaticProps({ params }) {
   // const t = jwt.token;
   // const user = await read({ userId: params.id }, { t });
   // console.log(user, "from getstaticprops");
-
+  if (!params.id)
+    return {
+      props: { userId: undefined },
+    };
   return {
     props: {
       userId: params.id,
