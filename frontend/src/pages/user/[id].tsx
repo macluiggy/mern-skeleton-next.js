@@ -88,9 +88,9 @@ export default function Profile() {
   //   //   abortController.abort();
   //   // };
   // }, []);
-  if (router.isReady) {
+  if (router && router.isReady) {
     const t = typeof jwt === "boolean" ? jwt : jwt.token;
-    read({ userId: `${router.query.id}` }, { t }).then((data) => {
+    read({ userId: `${router.query.id || ""}` }, { t }).then((data) => {
       // console.log(data);
       if (data && data.error) {
         setRedirectToSignin(true);
