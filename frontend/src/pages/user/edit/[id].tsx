@@ -9,7 +9,7 @@ import { list } from "../../../lib/api-user";
 
 export default function PrivateRoute({ userId }) {
   // const [id, setId] = useState("");
-  // const router = useRouter();
+  const router = useRouter();
   // const { id } = router.query;
   if (router.isFallback) return <div>Loading....</div>;
   const redirect = async () => {
