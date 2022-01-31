@@ -78,7 +78,7 @@ export default function Profile({ userId }) {
     //   abortController.abort();
     // };
   }, []);
-  if (!router.isFallback || !userId) {
+  if (!router.isFallback) {
     return (
       <>
         <h1>Please try again</h1>
@@ -150,7 +150,6 @@ const getUsers = async () => {
 export async function getStaticPaths() {
   const users = await getUsers();
   // console.log(users, "from getstaticpaths");
-
   return {
     paths: users.map((user: UserProps) => {
       return { params: { id: user._id } };
@@ -169,7 +168,7 @@ export async function getStaticProps({ params }) {
   // const t = jwt.token;
   // const user = await read({ userId: params.id }, { t });
   // console.log(user, "from getstaticprops");
-
+  // if (!params.id) return {};
   return {
     props: {
       userId: params.id,

@@ -12,7 +12,7 @@ export default function PrivateRoute({ userId }) {
   // const [id, setId] = useState("");
   const router = useRouter();
   // const { id } = router.query;
-  if (!router.isFallback || !userId) {
+  if (!router.isFallback) {
     return (
       <>
         <h1>Please try again</h1>
