@@ -100,7 +100,10 @@ export default function Profile({ userId }) {
       }
     });
   }
-  if (router.isFallback) return <div>Loading....</div>;
+  if (router.isFallback) {
+    router.push("/users");
+    return <div>Loading....</div>;
+  }
 
   if (redirectToSignin) return <Redirect path={"/signin"} />;
   return (

@@ -81,7 +81,13 @@ const Users = ({ users: _users }) => {
                             )}
                           </Avatar>
                         </ListItemAvatar>
-                        <ListItemText primary={name} />
+                        <ListItemText
+                          primary={
+                            currentId === _id
+                              ? "please wait, the user is being added"
+                              : name
+                          }
+                        />
                         <ListItemSecondaryAction>
                           <IconButton>
                             <ArrowForward />
